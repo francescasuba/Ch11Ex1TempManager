@@ -22,7 +22,10 @@ namespace TempManager.Controllers
             {
                 return Json(true);
             }
-            else return Json("Date is already in the database");
+            else
+            {
+                return Json(false);
+            }
         }
 
        

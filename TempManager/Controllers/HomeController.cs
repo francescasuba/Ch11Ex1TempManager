@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TempManager.Models;
 
@@ -22,13 +23,23 @@ namespace Ch11Ex1TempManager.Controllers
         public IActionResult Add(Temp temp)
         {
             if (ModelState.IsValid) {
-                data.Temps.Add(temp);
-                data.SaveChanges();
 
-                return RedirectToAction("Index");
-            } 
+                if (data.Temps.FirstOrDefault(t => t.Date == temp.Date))
+                {
+                    data.Temps.Add(temp);
+                    data.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewData["EditError"] = "Enter a unique date";
+                    return View(temp);
+                }
+                
+            }
             else {
-                ViewData["EditError"] = "Please, correct all errors.";
+                ViewData["EditError"] = "Please, correct all errors.";  
                 return View(temp);
             }
         }

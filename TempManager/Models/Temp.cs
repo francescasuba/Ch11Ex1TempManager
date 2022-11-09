@@ -9,7 +9,7 @@ namespace TempManager.Models
         public int Id { get; set; }
 
         [Required]
-        [Remote("CheckDate", "ValidationController", HttpMethod = "POST", ErrorMessage = "Date already exists.")]
+        [Remote("CheckDate", "Validation", ErrorMessage = "Date already exists.")]
         public DateTime? Date { get; set; }
 
         [Required]
