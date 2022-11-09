@@ -28,6 +28,7 @@ namespace Ch11Ex1TempManager.Controllers
                 return RedirectToAction("Index");
             } 
             else {
+                ViewData["EditError"] = "Please, correct all errors.";
                 return View(temp);
             }
         }
